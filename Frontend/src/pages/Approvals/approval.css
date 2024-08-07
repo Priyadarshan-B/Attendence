@@ -1,0 +1,26 @@
+.custom-table th,
+.custom-table td {
+  padding: 16px; /* Adjust the padding as needed */
+  text-align: center;
+}
+
+.custom-table th {
+  font-weight: bold;
+  background-color: #f5f5f5; /* Header background color */
+}
+
+.custom-table td {
+  vertical-align: middle; /* Center the text vertically */
+}
+
+.custom-table .MuiButton-root {
+  min-width: 120px; /* Set a fixed width for buttons */
+}
+
+.custom-table .MuiTableCell-root {
+  border-bottom: 1px solid #ddd; /* Border between rows */
+}
+
+.custom-table .MuiTablePagination-root {
+  padding: 0 16px; /* Padding for the pagination control */
+}

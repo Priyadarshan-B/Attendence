@@ -1,0 +1,220 @@
+.app-topbar h3 {
+    font-weight: 500;
+}
+
+.search-input input {
+    border: none;
+    outline: none;
+    font-size: 13px;
+    font-weight: 400;
+    background-color: transparent;
+    width: 280px;
+}
+
+.search-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0.5px solid rgb(188, 188, 188);
+    border-radius: 5px;
+    padding: 10px 10px;
+    gap: 5px;
+    color: grey;
+    background-color: rgb(248, 250, 252);
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}
+
+.topbar-account {
+    color: rgb(14, 120, 220);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: rgb(224, 240, 255);
+    padding: 8px 15px;
+    border-radius: 50px;
+}
+
+.topbar-account:hover {
+    background-color: rgb(14, 120, 220);
+    color: white;
+    cursor: pointer;
+}
+
+.user-name{
+    margin: 0px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 18px;
+    margin: 0px 15px;
+    color: #1c0c6a;
+    letter-spacing: 2px;
+}
+
+.menu-item {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    margin-top: 5px;
+}
+
+.menu-active,
+.menu-item:hover {
+    background-color: rgb(224, 240, 255);
+    color: rgb(14, 120, 220);
+}
+
+.menu-item:hover {
+    cursor: pointer;
+}
+
+.app-sidebar {
+    min-width: 250px;
+    height: 100%;
+    transition: left 0.3s;
+    overflow: auto;
+    padding: 10px;
+}
+
+.sidebar-open {
+    left: 0;
+}
+
+.app-body {
+    overflow: auto;
+    padding: 12px;
+    padding-bottom: 80px;
+    font-family: "Hind", sans-serif;
+}
+
+.sidebar-menu {
+    display: none;
+}
+
+.topbar-title-block {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 1371px) {
+    .app-sidebar {
+        display: none;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidebar-open {
+        display: block;
+        position: fixed;
+        z-index: 2;
+        box-shadow: 0.1px 0.5px 0.9px 0.5px rgb(188, 188, 188);
+    }
+}
+
+@media (max-width: 882px) {
+    .topbar-title {
+        display: none;
+        background-color: rgba(128, 128, 128, 0.196);
+    }
+
+    .search-input {
+        display: none;
+    }
+
+    .topbar-title-block {
+        justify-content: start;
+        gap: 10px;
+    }
+
+    .app-body {
+        padding: 7px;
+        margin-bottom: 60px;
+    }
+
+}
+
+.topbar-right-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-name {
+    margin: 0px 10px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.885);
+    font-size: 20px;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.list-div {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+.list-items {
+    padding: 0px;
+    border-radius: 3px;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
+
+.list-items:hover {
+    background-color: #1c0c6a25;
+}
+
+.list-items.active {
+    background-color: #1c0c6a34;
+}
+
+.list-items.active .link {
+    color: #1c0c6a;
+    border-left: 5px solid #493d88;
+    transition: all 0.5s;
+}
+
+.list-items:hover .link {
+    color: #1c0c6a;
+}
+
+.link {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.785);
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    transition: all 0.3s;
+}
+
+.logout-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+}
+
+
+/* cards */

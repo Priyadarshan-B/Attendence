@@ -1,0 +1,96 @@
+.total-login-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecebf3;
+}
+
+.login-card {
+    height: 65%;
+    width: 23%;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 5px -1px, rgba(0, 0, 0, 0.627) 0px 1px 5px -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.773);
+    gap: 20px;
+    min-width: 300px;
+}
+
+@media (max-width:999px){
+    .login-card{
+        height: fit-content;
+        width: 80%;
+    }
+
+    .error-card{
+        height: fit-content;
+        width: 80%;
+    }
+}
+
+.signin-button {
+    padding: 7px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.773);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 5px -1px, rgba(0, 0, 0, 0.627) 0px 1px 5px -1px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.signin-button:hover {
+    background-color: rgba(128, 128, 128, 0.134);
+}
+
+.google-logo {
+    height: 30px;
+}
+
+.login-image {
+    height: 350px;
+}
+
+
+
+/* error */
+
+
+.error-page{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecebf3;
+}
+
+.error-card{
+    width: 50%;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 5px -1px, rgba(0, 0, 0, 0.627) 0px 1px 5px -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.773);
+    gap: 20px;
+    min-width: 300px;
+    
+}
+
+.error-img{
+    height: 300px;
+}

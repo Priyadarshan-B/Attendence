@@ -1,0 +1,99 @@
+.student-details-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.student-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+
+}
+
+.n_approve{
+    color: red;
+}
+.detail-label {
+    font-weight: bold;
+    flex: 1;
+}
+.detail-value {
+    flex: 2;
+    text-align: right;
+}
+.att_det{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.att_det_today {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    flex-wrap: nowrap;
+    /* overflow-y: scroll; */
+    max-height: 50%;
+}
+.att_det_others{
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    max-height: 50%;  
+}
+
+.att_det_today h4, .att_det_others h4 {
+    margin-top: 0;
+}
+
+.attendance-row {
+    padding: 5px 0;
+    border-bottom: 1px solid #b3b3b3;
+}
+
+.attendance-row:last-child {
+    border-bottom: none;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .detail-value {
+        text-align: left;
+        padding-top: 5px;
+    }
+   
+}
+@media (max-width:900px){
+    .att_det{
+        flex-wrap: wrap;
+    }
+}
