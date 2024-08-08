@@ -45,4 +45,25 @@ exports.update_students_no_att = async (req, res) => {
    }
  };
  
+ exports.get_students_type_2 = async (req, res) => {
+  // const mentor = req.query.mentor;
+
+  // if (!mentor) {
+  //   return res.status(400).json({ error: "Mentor Id not found" });
+  // }
+  try {
+    const query = `
+    SELECT id, name , register_number, att_status
+     FROM students
+      WHERE type = 2
+     AND status = '1';
+    `;
+
+    const students = await get_database(query);
+    res.json(students);
+  } catch (err) {
+    console.error("Error Fetching Mentor-Student type 2 List", err);
+    res.status(500).json({ error: "Error fetching Mentor-Student type 2 List" });
+  }
+};
  

@@ -131,7 +131,7 @@ const radialChartData = {
     series: [uniqueIntervals + 32],
     options: {
       chart: {
-        height: 250,
+        height: 500,
         type: "radialBar",
       },
       plotOptions: {
@@ -222,15 +222,14 @@ const radialChartData = {
               options={radialChartData.options}
               series={radialChartData.series}
               type="radialBar"
-              height={200}
+              height={250}
             />
-            {/* <p>Attendence</p> */}
           </div>
          
         </div>
 
         <div className="att_det_others">
-          <h4>Other Dates</h4>
+          <h4>Other Biometric Timings..</h4>
           {otherAttendance.length > 0 ? (
             otherAttendance.map((detail, index) => (
               <div key={index} className="attendance-row">

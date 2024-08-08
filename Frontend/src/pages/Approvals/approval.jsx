@@ -16,6 +16,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import InputBox from "../../components/TextBox/textbox";
+import Popup from "../../components/popup/popup";
 import "./approval.css";  
 
 function Approvals(props) {
@@ -57,6 +58,8 @@ function Body() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const id = Cookies.get("id");
   const [searchTerm, setSearchTerm] = useState("");
+  const [open, setOpen] = useState(false);
+  const [selectedStudentIndex, setSelectedStudentIndex] = useState(null);
 
   useEffect(() => {
     requestApi("GET", `/mentor-students?mentor=${id}`)
@@ -146,6 +149,23 @@ function Body() {
 
     return () => clearInterval(timer);
   }, []);
+  const handleOpenDialog = (index) => {
+    setSelectedStudentIndex(index);
+    setOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+    setSelectedStudentIndex(null);
+  };
+
+  const handleConfirmDisapprove = () => {
+    if (selectedStudentIndex !== null) {
+      handleApprove(selectedStudentIndex);
+      console.log(selectedStudentIndex)
+    }
+    handleCloseDialog();
+  };
 
   return (
     <div>
@@ -155,15 +175,15 @@ function Body() {
           <InputBox
             value={searchTerm}
             onChange={handleSearch}
-            placeholder="Search by name or register number"
+            placeholder="Search.."
           />
         </div>
-        <Paper>
+        <Paper className="table-container">
           <TableContainer>
             <Table className="custom-table">
               <TableHead>
                 <TableRow>
-                  <TableCell>
+                  <TableCell sx={{width:"10%"}}>
                     <h3>S.No</h3>
                   </TableCell>
                   <TableCell>
@@ -176,7 +196,7 @@ function Body() {
                     <h3>Actions</h3>
                   </TableCell>
                   <TableCell>
-                    <h3>Countdown</h3>
+                    <h3>Time Left</h3>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -185,25 +205,35 @@ function Body() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((student, index) => (
                     <TableRow key={student.register_number}>
-                      <TableCell>{page * rowsPerPage + index + 1}</TableCell>
-                      <TableCell>{student.name}</TableCell>
-                      <TableCell>{student.register_number}</TableCell>
+                      <TableCell><b>{page * rowsPerPage + index + 1}</b></TableCell>
+                      <TableCell><b>{student.name}</b></TableCell>
+                      <TableCell><b>{student.register_number}</b></TableCell>
                       <TableCell>
-                        <Button
-                          variant="contained"
-                          color={student.att_status === "1" ? "secondary" : "primary"}
-                          onClick={() => handleApprove(index)}
-                        >
-                          {student.att_status === "1" ? "Disapprove" : "Approve"}
-                        </Button>
+                      <Button
+        variant="contained"
+        sx={{
+            backgroundColor: student.att_status === "1" ? "#da0000" : "#0012ee", 
+            color: '#fff', 
+            '&:hover': {
+                backgroundColor: student.att_status === "1" ? "#cc0000" : "#2f30ff" 
+            }
+        }}
+        onClick={
+            student.att_status === "1"
+                ? () => handleOpenDialog(index)
+                : () => handleApprove(index)
+        }
+    >
+        {student.att_status === "1" ? "Disapprove" : "Approve"}
+    </Button>
                       </TableCell>
                       <TableCell>
                         {student.att_status === "1" ? (
                           <span>
-                            {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+                            <b>{timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s</b>
                           </span>
                         ) : (
-                          ""
+                          "--"
                         )}
                       </TableCell>
                     </TableRow>
@@ -212,7 +242,7 @@ function Body() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[10, 15, 25, 100]}
+            rowsPerPageOptions={[10, 15, 25]}
             component="div"
             count={students.length}
             rowsPerPage={rowsPerPage}
@@ -222,6 +252,12 @@ function Body() {
           />
         </Paper>
       </div>
+      <Popup
+        open={open}
+        onClose={handleCloseDialog}
+        onConfirm={handleConfirmDisapprove}
+        text={"Are you sure you want to disapprove this student's biometric attendance? "}
+      />
     </div>
   );
 }

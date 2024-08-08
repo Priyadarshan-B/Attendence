@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.get("/mentor-students",mentor.get_students)
 router.get("/students-no-att", mentor.update_students_no_att)
+router.get("/students-arr",mentor.get_students_type_2)
 
 //bio-att
 router.put("/att-approve",bio_attendence.mentor_att_approve)

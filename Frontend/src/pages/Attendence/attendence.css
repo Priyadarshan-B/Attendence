@@ -1,0 +1,19 @@
+.attendance-container {
+    padding: 10px;
+}
+
+.custom-table h3 {
+    margin: 0;
+}
+
+
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.rows-per-page {
+    width: 150px;
+}
