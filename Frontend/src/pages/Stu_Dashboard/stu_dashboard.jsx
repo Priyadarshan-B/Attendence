@@ -128,7 +128,7 @@ function Body() {
 
 // console.log(uniqueIntervals)
 const radialChartData = {
-    series: [uniqueIntervals + 32],
+    series: [(uniqueIntervals/3) *100],
     options: {
       chart: {
         height: 500,
@@ -141,7 +141,7 @@ const radialChartData = {
           },
 
           startAngle: 0,
-          endAngle: 270,
+          endAngle: 360,
           track: {
             background: '#f2f2f2',
             strokeWidth: '100%',
@@ -192,7 +192,7 @@ const radialChartData = {
                   d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
                 </span>
               ) : (
-                <h5 className="n_approve">Need to be Approve..</h5>
+                <h5 className="n_approve">Pending Approval..</h5>
               )}
             </div>
           </div>

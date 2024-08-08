@@ -28,3 +28,14 @@
 .custom-table .MuiTablePagination-root {
   padding: 0 16px; /* Padding for the pagination control */
 }
+
+.status-button{
+  border: none;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-weight: 700;
+  width: 80px;
+  cursor: pointer;
+  text-align: center;
+  /* color: #189142; */
+}

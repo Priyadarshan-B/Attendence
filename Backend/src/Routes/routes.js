@@ -12,8 +12,10 @@ router.get("/students-arr",mentor.get_students_type_2)
 //bio-att
 router.put("/att-approve",bio_attendence.mentor_att_approve)
 router.put("/att-disapprove",bio_attendence.mentor_no_att_approve)
+
 //att_details
 router.get('/att-details',attendence_details.get_attendence_n_arrear)
+
 //stu_details
 router.get('/student-details', student_details.get_student_details)
 module.exports= router

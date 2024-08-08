@@ -209,10 +209,10 @@ function Body() {
                       <TableCell><b>{student.name}</b></TableCell>
                       <TableCell><b>{student.register_number}</b></TableCell>
                       <TableCell>
-                      <Button
-        variant="contained"
-        sx={{
-            backgroundColor: student.att_status === "1" ? "#da0000" : "#0012ee", 
+                      <button className="status-button"
+        // variant="contained"
+        style={{
+            backgroundColor: student.att_status === "1" ? "#da0000" : "#189142", 
             color: '#fff', 
             '&:hover': {
                 backgroundColor: student.att_status === "1" ? "#cc0000" : "#2f30ff" 
@@ -224,8 +224,8 @@ function Body() {
                 : () => handleApprove(index)
         }
     >
-        {student.att_status === "1" ? "Disapprove" : "Approve"}
-    </Button>
+        {student.att_status === "1" ? "Reject" : "Approve"}
+    </button>
                       </TableCell>
                       <TableCell>
                         {student.att_status === "1" ? (

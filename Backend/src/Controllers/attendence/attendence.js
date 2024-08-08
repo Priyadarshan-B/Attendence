@@ -47,3 +47,4 @@ exports.get_attendence_n_arrear = async (req, res) => {
         res.status(500).json({ error: "Error fetching Biometric Details" });
     }
 };
+

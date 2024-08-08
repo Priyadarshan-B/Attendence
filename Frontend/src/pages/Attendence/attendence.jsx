@@ -3,6 +3,7 @@ import AppLayout from '../../components/applayout/AppLayout';
 import '../../components/applayout/styles.css';
 import requestApi from '../../components/utils/axios';
 import RoleCheck from '../auth/RoleResource/resources';
+import Cookies from "js-cookie";
 import {
     Paper,
     Table,
@@ -19,6 +20,7 @@ import './attendence.css';
 function Attendence(props) {
     const rId = 3;
     const [roleIds, setRoleIds] = useState(null);
+    const gmail = Cookies.get('gmail')
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -36,7 +38,7 @@ function Attendence(props) {
 
         const fetchData = async () => {
             try {
-                const response = await requestApi("GET", '/students-arr');
+                const response = await requestApi("GET", `/students-arr?email=${gmail}`);
                 setData(response.data);
             } catch (error) {
                 console.error("Error fetching attendance data:", error);
@@ -59,6 +61,27 @@ function Attendence(props) {
 }
 
 function Body({ data, page, setPage, rowsPerPage, setRowsPerPage }) {
+    const [currentTime, setCurrentTime] = useState('');
+
+    useEffect(() => {
+        const now = new Date();
+        const hours = now.getHours() % 12 || 12;
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+        const formattedTime = `${hours}:${minutes}${ampm}`;
+        setCurrentTime(formattedTime);
+    }, []);
+
+    const handleCheckboxClick = async (studentId) => {
+        const timestamp = new Date().toISOString();
+        try {
+            await requestApi("POST", "/arr-students", { studentId, timestamp });
+            console.log(`Sent data for student ID: ${studentId}, Timestamp: ${timestamp}`);
+        } catch (error) {
+            console.error("Error sending attendance data:", error);
+        }
+    };
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -71,6 +94,26 @@ function Body({ data, page, setPage, rowsPerPage, setRowsPerPage }) {
     if (!data || data.length === 0) {
         return <div>No data available</div>;
     }
+    const isCheckboxEnabled = (timeSlot) => {
+        const parseTime = (time) => {
+            const match = time.match(/(\d{1,2}):(\d{2})(AM|PM)/);
+            if (!match) return null; // Return null if the time format doesn't match
+            let [_, hour, minute, ampm] = match;
+            hour = parseInt(hour);
+            minute = parseInt(minute);
+            if (ampm === 'PM' && hour !== 12) hour += 12;
+            if (ampm === 'AM' && hour === 12) hour = 0; // 12AM should be 0 hours
+            return hour * 60 + minute; // Convert time to minutes since midnight
+        };
+    
+        const [start, end] = timeSlot.split(' - ').map(parseTime);
+        if (start === null || end === null) return false; // If parsing fails, disable the checkbox
+        const current = parseTime(currentTime);
+        if (current === null) return false; // If parsing current time fails, disable the checkbox
+    
+        return current >= start && current <= end;
+    };
+    
 
     return (
         <div>
@@ -89,13 +132,11 @@ function Body({ data, page, setPage, rowsPerPage, setRowsPerPage }) {
                                 <TableCell><h3>Name</h3></TableCell>
                                 <TableCell><h3>Register Number</h3></TableCell>
                                 <TableCell><h3>8.45AM - 9.45AM</h3></TableCell>
-                                <TableCell><h3>9.45AM - 10.45PM</h3></TableCell>
+                                <TableCell><h3>9.45AM - 10.45AM</h3></TableCell>
                                 <TableCell><h3>11AM - 12PM</h3></TableCell>
                                 <TableCell><h3>1PM - 2PM</h3></TableCell>
                                 <TableCell><h3>2PM - 3PM</h3></TableCell>
-                                <TableCell><h3>3PM - 4PM</h3></TableCell>
-                                <TableCell><h3>Timings</h3></TableCell>
-
+                                <TableCell><h3>3PM - 11.00PM</h3></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -104,9 +145,12 @@ function Body({ data, page, setPage, rowsPerPage, setRowsPerPage }) {
                                     <TableCell>{page * rowsPerPage + index + 1}</TableCell>
                                     <TableCell>{row.name}</TableCell>
                                     <TableCell>{row.register_number}</TableCell>
-                                    {[...Array(7)].map((_, index) => (
-                                        <TableCell key={index}>
-                                            <Checkbox />
+                                    {['8:45AM - 9:45AM', '9:45AM - 10:45AM', '11:00AM - 12:00PM', '1:00PM - 2:00PM', '2:00PM - 3:00PM', '3:00PM - 11:00PM'].map((slot, idx) => (
+                                        <TableCell key={idx}>
+                                            <Checkbox
+                                                disabled={!isCheckboxEnabled(slot)}
+                                                onClick={() => handleCheckboxClick(row.id)}
+                                            />
                                         </TableCell>
                                     ))}
                                 </TableRow>
