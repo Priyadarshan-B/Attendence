@@ -14,6 +14,7 @@ exports.get_resource = async (req, res) => {
         ON role_resources.resources_id = resources.id
         WHERE role_id = ?
         AND role_resources.status IN ('1')
+        AND resources.status = '1'
         ORDER BY order_by
         `;
 

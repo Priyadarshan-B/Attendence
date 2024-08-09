@@ -3,6 +3,9 @@ const mentor = require('../Controllers/mentor/mentor')
 const bio_attendence = require('../Controllers/attendence/biometric')
 const attendence_details = require('../Controllers/attendence/attendence')
 const student_details = require('../Controllers/student/student')
+const uploadTime = require('../Controllers/arr_time_uploads/time_upload')
+const arrear_attendence = require('../Controllers/attendence/arrear')
+
 const router = express.Router()
 
 router.get("/mentor-students",mentor.get_students)
@@ -18,4 +21,10 @@ router.get('/att-details',attendence_details.get_attendence_n_arrear)
 
 //stu_details
 router.get('/student-details', student_details.get_student_details)
+
+//time upload
+router.post('/time-upload',uploadTime.add_attendance_records)
+
+//arrear-attendence
+router.get('/arr-attendence', arrear_attendence.get_arrear_att)
 module.exports= router

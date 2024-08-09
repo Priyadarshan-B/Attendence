@@ -34,6 +34,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 //cors
+app.use(express.json());
 const cors_config = {
     origin: "*",
   };

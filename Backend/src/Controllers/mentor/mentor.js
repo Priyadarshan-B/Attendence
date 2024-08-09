@@ -64,7 +64,7 @@ exports.update_students_no_att = async (req, res) => {
       return res.status(403).json({ error: "Email not found or status mismatch" });
     }
 
-    const timeRange = result[0].time_range;
+    const timeRange = result[2].time_range;
     const [startTime, endTime] = timeRange.split(' - ').map(time => moment(time, 'h:mmA'));
 
     const currentMoment = moment(currentTime, 'h:mmA');

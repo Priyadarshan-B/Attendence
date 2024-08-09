@@ -6,6 +6,7 @@ import Welcome from "./pages/welcome/welcome";
 import Attendence from "./pages/Attendence/attendence";
 import Approvals from "./pages/Approvals/approval";
 import StuDashboard from "./pages/Stu_Dashboard/stu_dashboard";
+import TimeUpload from "./pages/Time_Upload/time_upload";
 import Error from "./pages/error";
 
 function App() {
@@ -20,9 +21,7 @@ function App() {
           <Route path="/attendence" element={<Attendence />} />
           <Route path="/approval" element={<Approvals />} />
           <Route path="/dashboard" element={<StuDashboard />} />
-
-
-          
+          <Route path="/timeslot" element={<TimeUpload />} />  
         </Routes>
       </BrowserRouter>
     </>
